@@ -22,6 +22,12 @@ export class AppController {
     return this.appService.pingServiceUser();
   }
 
+  @Post('/contact-user')
+  contactUser() {
+    return this.appService.contactServiceUser();
+  }
+  
+
   @Get('/ping-all')
   pingAll() {
     return zip(

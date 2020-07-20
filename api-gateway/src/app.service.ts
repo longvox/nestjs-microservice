@@ -42,4 +42,18 @@ export class AppService {
         map((message: string) => ({ message, duration: Date.now() - startTs })),
       );
   }
+
+  contactServiceUser(phone: string, email: string) {
+    const startTs = Date.now();
+    const pattern = { cmd: 'contact' };
+    const payload = {
+      email,
+      phone
+    };
+    return this.clientServiceUser
+      .send<string>(pattern, payload)
+      .pipe(
+        map((message: string) => ({ message, duration: Date.now() - startTs })),
+      );
+  }
 }

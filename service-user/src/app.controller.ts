@@ -16,7 +16,12 @@ export class AppController {
 
   @MessagePattern({ cmd: 'ping' })
   ping(_: any) {
-    return of('[SERVICE_USER] pong').pipe(delay(2000));
+    return of('[SERVICE_USER] pong').pipe(delay(1000));
   }
 
+  @MessagePattern({ cmd: 'contact' })
+  contact(data: object) {
+    console.log(data)
+    return of('sussess create new contact').pipe(delay(1000))
+  }
 }
