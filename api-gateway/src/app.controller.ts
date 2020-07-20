@@ -1,7 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { zip } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+// dto
+import { ContactDto } from './dto/user-contact.dto';
 
 @Controller()
 export class AppController {
@@ -23,8 +26,9 @@ export class AppController {
   }
 
   @Post('/contact-user')
-  contactUser() {
-    return this.appService.contactServiceUser();
+  contactUser(@Body() contact: ContactDto) {
+    const { phone, email } = contact;
+    return this.appService.contactServiceUser(phone, email);
   }
   
 
