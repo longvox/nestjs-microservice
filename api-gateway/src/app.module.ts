@@ -22,6 +22,14 @@ import { AppService } from './app.service';
           port: 8889,
         },
       },
+      {
+        name: 'SERVICE_USER',
+        transport: Transport.TCP,
+        options: {
+          host: '127.0.0.1',
+          port: 8887
+        }
+      }
     ]),
   ],
   controllers: [AppController],
