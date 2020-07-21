@@ -15,11 +15,12 @@
 ## intent:ask_name
 - [oanh](name)
 - my name is [oanh](name)
+- my name is [long](name)
 - name is [oanh](name)
 
 ## intent:hi_rasa
 - hello rasa
-- hi rasae
+- hi rasa
 - hey rasa
 
 ## intent:ask_email
@@ -39,6 +40,6 @@
 ## regex:name
 - /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
 
-## lookup:name.txt
+## lookup:name
 data/_lookup/name.txt
 

@@ -15,56 +15,7 @@ from rasa_sdk.events import SlotSet
 from rasa_sdk.forms import FormAction, REQUESTED_SLOT
 import asyncio
 import re
-import pika
-import uuid
-# from rasa.core.brokers.pika import PikaEventBroker
-# from rasa.core.tracker_store import InMemoryTrackerStore
-
-# pika_broker = PikaEventBroker('localhost',
-#                               'guest',
-#                               'guest',
-#                               queues=['rasa_events'])
-
-# tracker_store = InMemoryTrackerStore(
-#     domain="localhost", event_broker=pika_broker)
-
-
-class BotEvent(object):
-    def __init__(self):
-        self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host='localhost'))
-
-        self.channel = self.connection.channel()
-
-        result = self.channel.queue_declare(queue='', exclusive=True)
-        self.callback_queue = result.method.queue
-
-        self.channel.basic_consume(
-            queue=self.callback_queue,
-            on_message_callback=self.on_response,
-            auto_ack=True)
-
-    def on_response(self, ch, method, props, body):
-        if self.corr_id == props.correlation_id:
-            self.response = body
-
-    def call(self, message):
-        self.response = None
-        self.corr_id = str(uuid.uuid4())
-        self.channel.basic_publish(
-            exchange='',
-            routing_key='bot_event',
-            properties=pika.BasicProperties(
-                reply_to=self.callback_queue,
-                correlation_id=self.corr_id,
-            ),
-            body=str(message))
-        # while self.response is None:
-        # self.connection.process_data_events()
-        return self.response
-
-
-bot_event = BotEvent()
+import requests
 
 
 def get_dict_certain_keys(dic, keys):
@@ -170,5 +121,8 @@ class InfoForm(FormAction):
         print(tracker.slots)
         email = tracker.slots["email"]
         phone = tracker.slots["phone"]
-        bot_event.call({"email": email, "phone": phone})
+
+        url = 'http://127.0.0.1:3000/contact-user'
+        re = requests.post(url=url, data={"phone": phone, "email": email})
+        print(re.text)
         return []

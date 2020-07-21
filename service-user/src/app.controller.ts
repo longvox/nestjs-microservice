@@ -8,12 +8,12 @@ import { delay } from 'rxjs/operators';
 export class AppController {
   @MessagePattern({ cmd: 'ping' })
   ping(_: any) {
-    return of('[SERVICE_USER] pong').pipe(delay(1000));
+    return of('[SERVICE_USER] pong');
   }
 
   @MessagePattern({ cmd: 'contact' })
   contact(data: object) {
     console.log(data)
-    return of('sussess create new contact').pipe(delay(1000))
+    return of('sussess create new contact');
   }
 }

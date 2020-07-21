@@ -17,7 +17,7 @@ export class AppService {
     return this.clientServiceA
       .send<string>(pattern, payload)
       .pipe(
-        map((message: string) => ({ message, duration: Date.now() - startTs })),
+        map((message: any) => ({ message, duration: Date.now() - startTs })),
       );
   }
 
@@ -28,7 +28,7 @@ export class AppService {
     return this.clientServiceB
       .send<string>(pattern, payload)
       .pipe(
-        map((message: string) => ({ message, duration: Date.now() - startTs })),
+        map((message: any) => ({ message, duration: Date.now() - startTs })),
       );
   }
   
@@ -39,7 +39,7 @@ export class AppService {
     return this.clientServiceUser
       .send<string>(pattern, payload)
       .pipe(
-        map((message: string) => ({ message, duration: Date.now() - startTs })),
+        map((message: any) => ({ message, duration: Date.now() - startTs })),
       );
   }
 
@@ -53,7 +53,7 @@ export class AppService {
     return this.clientServiceUser
       .send<string>(pattern, payload)
       .pipe(
-        map((message: string) => ({ message, duration: Date.now() - startTs })),
+        map((message: any) => ({ message, duration: Date.now() - startTs })),
       );
   }
 }
